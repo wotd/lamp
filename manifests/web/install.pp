@@ -17,4 +17,12 @@ $packages = [
 package { $packages:
   ensure => present,
 }
+
+class { '::apache':
+  mpm_module => 'prefork',
+  default_vhost => false,
+  server_signature => 'Off',
+  server_tokens => 'Prod',
+}
+
 }
