@@ -35,7 +35,10 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class lamp {
-
+class lamp (
+  $root_password = $lamp::params::root_password
+) inherits lamp::params {
+  include lamp::db::install
+  include lamp::web::install
 
 }
