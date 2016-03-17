@@ -45,9 +45,22 @@ class lamp (
   $ssl           = $lamp::params::ssl,
   $ssl_cert      = $lamp::params::ssl_cert,
   $ssl_key       = $lamp::params::ssl_key,
+  $phpinfo       = $lamp::params::phpinfo,
+  $packages      = $lamp::params::packages
 ) inherits lamp::params {
-  include lamp::db::install
-  include lamp::web::install
-  lamp::web::vhost { 'puppet_default':  }
+  include lamp::db
+  include lamp::web
+
+  anchor { 'lamp::start': }
+  anchor { 'lamp::end': }
+
+  Anchor['lamp::start'] ->
+  Class['lamp::web'] ->
+  Class['lamp::db'] ->
+  Anchor['lamp::end']
+
+  lamp::web::vhost { 'puppet_default':
+  phpinfo => 'absent',
+  }
 
 }

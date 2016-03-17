@@ -7,7 +7,8 @@ define lamp::web::vhost (
   $ssl           = $lamp::ssl,
   $ssl_cert      = $lamp::ssl_cert,
   $ssl_key       = $lamp::ssl_key,
-  $vhost_name    = $name
+  $vhost_name    = $name,
+  $phpinfo       = $lamp::phpinfo
 ) {
   apache::vhost { "$vhost_name":
     ensure         => "$vhost_ensure",
@@ -19,5 +20,15 @@ define lamp::web::vhost (
     ssl_cert       => "$ssl_cert",
     ssl_key        => "$ssl_cert",
     require        => Class['lamp::web::install'],
+    options        => ['Includes', 'MultiViews', 'FollowSymLinks'],
   }
+
+  file { "$docroot$vhost_name/phpinfo.php":
+    ensure  => "$phpinfo",
+    content => "$vhost_name \n <?php phpinfo(); ?>",
+    owner   => "$docroot_owner",
+    group   => "$docroot_group",
+    mode    => '644',
+  }
+
 }
