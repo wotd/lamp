@@ -36,9 +36,19 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 class lamp (
-  $root_password = $lamp::params::root_password
+  $apache_ensure = $lamp::params::apache_ensure,
+  $mysql_ensure  = $lamp::params::mysql_ensure,
+  $root_password = $lamp::params::root_password,
+  $port          = $lamp::params::port,
+  $docroot       = $lamp::params::docroot,
+  $docroot_owner = $lamp::params::docroot_owner,
+  $docroot_group = $lamp::params::docroot_group,
+  $ssl           = $lamp::params::ssl,
+  $ssl_cert      = $lamp::params::ssl_cert,
+  $ssl_key       = $lamp::params::ssl_key,
 ) inherits lamp::params {
   include lamp::db::install
   include lamp::web::install
+  lamp::web::vhost { 'puppet_default':  }
 
 }
