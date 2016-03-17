@@ -1,4 +1,5 @@
 define lamp::web::vhost (
+  $vhost_ensure  = $lamp::vhost_ensure,
   $port          = $lamp::port,
   $docroot       = $lamp::docroot,
   $docroot_owner = $lamp::docroot_owner,
@@ -9,6 +10,7 @@ define lamp::web::vhost (
   $vhost_name    = $name
 ) {
   apache::vhost { "$vhost_name":
+    ensure         => "$vhost_ensure",
     port           => "$port",
     docroot        => "$docroot/$vhost_name",
     docroot_owner  => "$docroot_owner",

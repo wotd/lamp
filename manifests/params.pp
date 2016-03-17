@@ -1,6 +1,5 @@
 class lamp::params {
-  $apache_ensure = 'present'
-  $mysql_ensure  = 'present'
+  $vhost_ensure  = 'present'
   $root_password = 'strongpassword'
   $port          = '80'
   $docroot       = '/var/www/'

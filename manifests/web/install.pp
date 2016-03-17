@@ -1,4 +1,4 @@
-class lamp::web::install ($apache_ensure = $lamp::apache_ensure){
+class lamp::web::install{
 $packages = [
   "php5",
   "php5-cli",
@@ -16,11 +16,10 @@ $packages = [
 ]
 
 package { $packages:
-  ensure => "$apache_ensure",
+  ensure => 'present',
 }
 
 class { '::apache':
-  package_ensure   => "$apache_ensure",
   mpm_module       => 'prefork',
   default_vhost    => false,
   server_signature => 'Off',

@@ -36,8 +36,7 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 class lamp (
-  $apache_ensure = $lamp::params::apache_ensure,
-  $mysql_ensure  = $lamp::params::mysql_ensure,
+  $vhost_ensure  = $lamp::params::vhost_ensure,
   $root_password = $lamp::params::root_password,
   $port          = $lamp::params::port,
   $docroot       = $lamp::params::docroot,
